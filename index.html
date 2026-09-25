@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Sissons · Projects</title>
+  <meta name="description" content="Projects by Ron Sissons: PhotoWallz live event photo walls, a CalPERS and CalSTRS retirement planner, golf and football games, and a dress-up game for kids.">
+  <meta property="og:title" content="The Sissons · Projects">
+  <meta property="og:description" content="Free web apps and games that run right in your browser.">
+  <meta property="og:image" content="img/calpers-retirement-planner.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b5cad'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='700' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f6f7f9; --surface: #ffffff; --text: #16202c; --muted: #5b6776; --line: #e3e7ec;
+      --accent: #0b5cad; --accent-soft: #e6f0fa; --chip: #eef1f4; --shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 16px rgba(16, 24, 40, .06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f141a; --surface: #171e26; --text: #e8edf2; --muted: #9aa7b4; --line: #26303b;
+        --accent: #5aa7f0; --accent-soft: #15283b; --chip: #212a34; --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+    header.top { border-bottom: 1px solid var(--line); background: var(--surface); }
+    header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -.01em; color: var(--text); text-decoration: none; }
+    .brand .mark { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 17px; }
+    nav.cats { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    nav.cats a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 600; padding: 6px 10px; border-radius: 8px; }
+    nav.cats a:hover { background: var(--chip); color: var(--text); }
+
+    .hero { padding: 48px 0 20px; }
+    .hero h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0; }
+
+    section.cat { padding: 28px 0 8px; scroll-margin-top: 16px; }
+    section.cat > h2 { font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
+    section.cat > p { color: var(--muted); margin: 0 0 18px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 22px; }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+    .card .shot { display: block; aspect-ratio: 16 / 10; background: var(--chip); border-bottom: 1px solid var(--line); overflow: hidden; }
+    .card .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .25s ease; }
+    .card .shot:hover img { transform: scale(1.02); }
+    .card .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .card h3 { font-size: 18px; margin: 0; letter-spacing: -.01em; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span { font-size: 12px; font-weight: 600; background: var(--chip); color: var(--muted); padding: 2px 8px; border-radius: 99px; }
+    .actions { display: flex; gap: 8px; margin-top: auto; padding-top: 4px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 700; font-size: 14px; padding: 9px 14px; border-radius: 9px; }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.primary:hover { filter: brightness(1.08); }
+    .btn.ghost { color: var(--text); border: 1px solid var(--line); }
+    .btn.ghost:hover { background: var(--chip); }
+
+    .featured { display: grid; grid-template-columns: 1.15fr 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); margin: 8px 0 12px; scroll-margin-top: 16px; }
+    .featured .shot { display: block; background: var(--chip); min-height: 100%; }
+    .featured .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+    .featured .body { padding: 26px 28px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+    .featured .kicker { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .featured h2 { font-size: 28px; line-height: 1.15; margin: 0; letter-spacing: -.02em; }
+    .featured p { margin: 0; color: var(--muted); }
+    .featured ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+    .featured .actions { margin-top: 6px; }
+
+    footer { margin-top: 48px; border-top: 1px solid var(--line); background: var(--surface); }
+    footer .wrap { padding: 22px 16px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+    @media (max-width: 560px) {
+      nav.cats { display: none; }
+      .hero { padding-top: 32px; }
+      .hero p { font-size: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured .shot { aspect-ratio: 16 / 10; }
+      .featured .body { padding: 20px 18px 22px; }
+      .featured h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="./"><span class="mark">S</span>The Sissons</a>
+      <nav class="cats" id="nav" aria-label="Project categories"></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <h1>Things I've built</h1>
+      <p>A live photo-wall business for events, plus free apps and games that run right in your browser. The free ones need no sign-up or install, and their source is on GitHub.</p>
+    </div>
+    <section class="featured" id="photowallz" aria-labelledby="pw-title">
+      <a class="shot" href="https://photowallz.netlify.app/" aria-label="Visit PhotoWallz"><img src="img/photowallz.webp" alt="The PhotoWallz home page" width="800" height="500"></a>
+      <div class="body">
+        <span class="kicker">Featured · My business</span>
+        <h2 id="pw-title">PhotoWallz</h2>
+        <p>Live photo walls for weddings, parties and events. Guests scan one QR code and upload their photos, which show up live on a TV or projector. Afterward the host downloads the whole collection in one file.</p>
+        <ul>
+          <li>No app for guests to install</li>
+          <li>Uploads are screened before they reach the wall</li>
+          <li>Free to start</li>
+        </ul>
+        <div class="actions"><a class="btn primary" href="https://photowallz.netlify.app/">Visit PhotoWallz</a></div>
+      </div>
+    </section>
+    <div id="projects"></div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Ron Sissons · thesissons.com</span>
+      <span>All projects on <a href="https://github.com/rsissons">GitHub</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Categories come from GitHub repo topics. A repo shows up here only if it has one of these topics;
+    // the first match in this order wins (so a kids' game goes under "For the kids").
+    const CATEGORIES = [
+      { topic: 'retirement-planning', id: 'retirement', title: 'Retirement planning', blurb: 'Tools for planning a public-employee retirement in California.' },
+      { topic: 'kids', id: 'kids', title: 'For the kids', blurb: 'Made for my grandkids. No reading needed.' },
+      { topic: 'game', id: 'games', title: 'Games', blurb: 'Sports games you can play on a phone, tablet or computer.' },
+    ];
+    const TITLES = {
+      'calpers-retirement-planner': 'CalPERS & CalSTRS Retirement Planner',
+      'san-dimas-golf': 'San Dimas Canyon Golf',
+      'gridiron-qb': 'Gridiron QB',
+      'dolly-dress-up': 'Dolly Dress-Up',
+    };
+    const IMAGES = {
+      'calpers-retirement-planner': 'img/calpers-retirement-planner.webp',
+      'san-dimas-golf': 'img/san-dimas-golf.webp',
+      'gridiron-qb': 'img/gridiron-qb.webp',
+      'dolly-dress-up': 'img/dolly-dress-up.webp',
+    };
+    const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning']);
+    // Shown if GitHub can't be reached (and replaced by the live list when it can)
+    const FALLBACK = [
+      { name: 'calpers-retirement-planner', description: 'A private, browser-only retirement planner for CalPERS and CalSTRS members in California. Runs entirely in your browser.', homepage: 'https://rsissons.github.io/calpers-retirement-planner/', topics: ['retirement-planning', 'calpers', 'calstrs'], pushed_at: '2026-09-25' },
+      { name: 'san-dimas-golf', description: 'A daily golf game on the real San Dimas Canyon course. Type a name and play.', homepage: 'https://rsissons.github.io/san-dimas-golf/', topics: ['game', 'golf'], pushed_at: '2026-09-24' },
+      { name: 'gridiron-qb', description: '3D pull-back quarterback game: playbook routes, field goals, target toss, four stadiums', homepage: 'https://rsissons.github.io/gridiron-qb/', topics: ['game', 'football'], pushed_at: '2026-09-25' },
+      { name: 'dolly-dress-up', description: 'A no-reading dress-up, makeup and hygiene game for little kids', homepage: 'https://rsissons.github.io/dolly-dress-up/', topics: ['kids', 'game'], pushed_at: '2026-09-24' },
+    ];
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const titleOf = r => TITLES[r.name] ?? r.name.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const safeUrl = u => /^https:\/\//.test(u ?? '') ? u : '';
+
+    function card(r) {
+      const url = safeUrl(r.homepage);
+      const code = `https://github.com/rsissons/${encodeURIComponent(r.name)}`;
+      const img = IMAGES[r.name] ?? `https://opengraph.githubassets.com/1/rsissons/${encodeURIComponent(r.name)}`;
+      const tags = (r.topics ?? []).filter(t => !HIDDEN_TOPICS.has(t)).map(t => `<span>${esc(t)}</span>`).join('');
+      const title = esc(titleOf(r));
+      return `<article class="card">
+        <a class="shot" href="${esc(url || code)}" aria-label="Open ${title}"><img src="${esc(img)}" alt="Screenshot of ${title}" loading="lazy" width="800" height="500"></a>
+        <div class="body">
+          <h3>${title}</h3>
+          <p>${esc(r.description)}</p>
+          ${tags ? `<div class="tags">${tags}</div>` : ''}
+          <div class="actions">
+            ${url ? `<a class="btn primary" href="${esc(url)}">Open</a>` : ''}
+            <a class="btn ghost" href="${esc(code)}">Source</a>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function render(repos) {
+      const byCat = CATEGORIES.map(c => ({ ...c, repos: [] }));
+      for (const r of repos) {
+        const cat = byCat.find(c => (r.topics ?? []).includes(c.topic));
+        if (cat) cat.repos.push(r);
+      }
+      const shown = byCat.filter(c => c.repos.length);
+      for (const c of shown) c.repos.sort((a, b) => String(b.pushed_at).localeCompare(String(a.pushed_at)));
+      document.getElementById('nav').innerHTML = '<a href="#photowallz">PhotoWallz</a>' + shown.map(c => `<a href="#${c.id}">${esc(c.title)}</a>`).join('');
+      document.getElementById('projects').innerHTML = shown.map(c => `
+        <section class="cat" id="${c.id}">
+          <h2>${esc(c.title)}</h2>
+          <p>${esc(c.blurb)}</p>
+          <div class="grid">${c.repos.map(card).join('')}</div>
+        </section>`).join('');
+    }
+
+    render(FALLBACK);
+    // Live list: public, non-fork repos with a category topic
+    fetch('https://api.github.com/users/rsissons/repos?per_page=100&sort=pushed')
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(list => {
+        const repos = list.filter(r => !r.fork && !r.private && !r.archived);
+        if (repos.some(r => CATEGORIES.some(c => (r.topics ?? []).includes(c.topic)))) render(repos);
+      })
+      .catch(() => { /* keep the built-in list */ });
+  </script>
+</body>
+</html>
