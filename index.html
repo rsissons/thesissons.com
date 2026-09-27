@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Sissons · Projects</title>
-  <meta name="description" content="Projects by Ron Sissons: PhotoWallz live event photo walls, a CalPERS and CalSTRS retirement planner, golf on two real local courses, a football game, and a dress-up game for kids.">
+  <meta name="description" content="Projects by Ron Sissons: PhotoWallz live event photo walls, a CalPERS and CalSTRS retirement planner, golf on two real local courses, a football game, a dress-up game for kids, and a backyard recipe book.">
   <meta property="og:title" content="The Sissons · Projects">
   <meta property="og:description" content="Free web apps and games that run right in your browser.">
   <meta property="og:image" content="img/calpers-retirement-planner.webp">
@@ -133,6 +133,7 @@
       { topic: 'retirement-planning', id: 'retirement', title: 'Retirement planning', blurb: 'Tools for planning a public-employee retirement in California.' },
       { topic: 'kids', id: 'kids', title: 'For the kids', blurb: 'Made for my grandkids. No reading needed.' },
       { topic: 'game', id: 'games', title: 'Games', blurb: 'Sports games you can play on a phone, tablet or computer.' },
+      { topic: 'cooking', id: 'cooking', title: 'Cooking', blurb: 'What I cook on the Blackstone, the Pit Barrel and the grill.' },
     ];
     const TITLES = {
       'calpers-retirement-planner': 'CalPERS & CalSTRS Retirement Planner',
@@ -140,6 +141,7 @@
       'gridiron-qb': 'Gridiron QB',
       'dolly-dress-up': 'Dolly Dress-Up',
       'unicorn-stable': 'Unicorn Stable',
+      'grill-recipes': 'Flat Top, Barrel & Grill',
     };
     const IMAGES = {
       'calpers-retirement-planner': 'img/calpers-retirement-planner.webp',
@@ -147,8 +149,9 @@
       'gridiron-qb': 'img/gridiron-qb.webp',
       'dolly-dress-up': 'img/dolly-dress-up.webp',
       'unicorn-stable': 'img/unicorn-stable.webp',
+      'grill-recipes': 'img/grill-recipes.webp',
     };
-    const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning']);
+    const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning', 'cooking']);
     // Shown if GitHub can't be reached (and replaced by the live list when it can)
     const FALLBACK = [
       { name: 'calpers-retirement-planner', description: 'A private, browser-only retirement planner for CalPERS and CalSTRS members in California. Runs entirely in your browser.', homepage: 'https://rsissons.github.io/calpers-retirement-planner/', topics: ['retirement-planning', 'calpers', 'calstrs'], pushed_at: '2026-09-25' },
@@ -156,6 +159,7 @@
       { name: 'gridiron-qb', description: '3D pull-back quarterback game: playbook routes, field goals, target toss, four stadiums', homepage: 'https://rsissons.github.io/gridiron-qb/', topics: ['game', 'football'], pushed_at: '2026-09-25' },
       { name: 'dolly-dress-up', description: 'A no-reading dress-up, makeup and hygiene game for little kids', homepage: 'https://rsissons.github.io/dolly-dress-up/', topics: ['kids', 'game'], pushed_at: '2026-09-24' },
       { name: 'unicorn-stable', description: 'A no-reading unicorn game for little kids: build it, care for it, fly it.', homepage: 'https://rsissons.github.io/unicorn-stable/', topics: ['kids', 'game', 'unicorn'], pushed_at: '2026-09-26' },
+      { name: 'grill-recipes', description: 'Blackstone, Pit Barrel Cooker and grill recipes with Meal Nights and a grocery list', homepage: 'https://rsissons.github.io/grill-recipes/', topics: ['cooking', 'recipes', 'blackstone', 'bbq', 'grilling'], pushed_at: '2026-09-27' },
     ];
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
