@@ -139,12 +139,14 @@
       'san-dimas-golf': 'Canyon Golf',
       'gridiron-qb': 'Gridiron QB',
       'dolly-dress-up': 'Dolly Dress-Up',
+      'unicorn-stable': 'Unicorn Stable',
     };
     const IMAGES = {
       'calpers-retirement-planner': 'img/calpers-retirement-planner.webp',
       'san-dimas-golf': 'img/san-dimas-golf.webp',
       'gridiron-qb': 'img/gridiron-qb.webp',
       'dolly-dress-up': 'img/dolly-dress-up.webp',
+      'unicorn-stable': 'img/unicorn-stable.webp',
     };
     const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning']);
     // Shown if GitHub can't be reached (and replaced by the live list when it can)
@@ -153,6 +155,7 @@
       { name: 'san-dimas-golf', description: 'Canyon Golf: a daily golf game on the real San Dimas Canyon and Marshall Canyon courses. Type a name and play.', homepage: 'https://rsissons.github.io/san-dimas-golf/', topics: ['game', 'golf'], pushed_at: '2026-09-24' },
       { name: 'gridiron-qb', description: '3D pull-back quarterback game: playbook routes, field goals, target toss, four stadiums', homepage: 'https://rsissons.github.io/gridiron-qb/', topics: ['game', 'football'], pushed_at: '2026-09-25' },
       { name: 'dolly-dress-up', description: 'A no-reading dress-up, makeup and hygiene game for little kids', homepage: 'https://rsissons.github.io/dolly-dress-up/', topics: ['kids', 'game'], pushed_at: '2026-09-24' },
+      { name: 'unicorn-stable', description: 'A no-reading unicorn game for little kids: build it, care for it, fly it.', homepage: 'https://rsissons.github.io/unicorn-stable/', topics: ['kids', 'game', 'unicorn'], pushed_at: '2026-09-26' },
     ];
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
