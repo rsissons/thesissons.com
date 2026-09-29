@@ -132,7 +132,7 @@
     const CATEGORIES = [
       { topic: 'retirement-planning', id: 'retirement', title: 'Retirement planning', blurb: 'Tools for planning a public-employee retirement in California.' },
       { topic: 'kids', id: 'kids', title: 'For the kids', blurb: 'Made for my grandkids. No reading needed.' },
-      { topic: 'game', id: 'games', title: 'Games', blurb: 'Sports games you can play on a phone, tablet or computer.' },
+      { topic: 'game', id: 'games', title: 'Games', blurb: 'Sports and arcade games you can play on a phone, tablet or computer.' },
       { topic: 'cooking', id: 'cooking', title: 'Cooking', blurb: 'What I cook on the flat top, the smoker, the slow cooker and the grill.' },
     ];
     const TITLES = {
@@ -142,6 +142,7 @@
       'dolly-dress-up': 'Dolly Dress-Up',
       'unicorn-stable': 'Unicorn Stable',
       'grill-recipes': 'Sear, Smoke & Simmer',
+      'retro-arcade': 'Retro Arcade',
     };
     const IMAGES = {
       'calpers-retirement-planner': 'img/calpers-retirement-planner.webp',
@@ -150,6 +151,7 @@
       'dolly-dress-up': 'img/dolly-dress-up.webp',
       'unicorn-stable': 'img/unicorn-stable.webp',
       'grill-recipes': 'img/grill-recipes.webp',
+      'retro-arcade': 'img/retro-arcade.webp',
     };
     const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning', 'cooking']);
     // Shown if GitHub can't be reached (and replaced by the live list when it can)
@@ -160,6 +162,7 @@
       { name: 'dolly-dress-up', description: 'A no-reading dress-up, makeup and hygiene game for little kids', homepage: 'https://rsissons.github.io/dolly-dress-up/', topics: ['kids', 'game'], pushed_at: '2026-09-24' },
       { name: 'unicorn-stable', description: 'A no-reading unicorn game for little kids: build it, care for it, fly it.', homepage: 'https://rsissons.github.io/unicorn-stable/', topics: ['kids', 'game', 'unicorn'], pushed_at: '2026-09-26' },
       { name: 'grill-recipes', description: 'Flat top, smoker, slow cooker, sous vide and grill recipes with Meal Nights, a cook-it-all planner and a grocery list with sale prices', homepage: 'https://rsissons.github.io/grill-recipes/', topics: ['cooking', 'recipes', 'blackstone', 'bbq', 'grilling'], pushed_at: '2026-09-27' },
+      { name: 'retro-arcade', description: 'Ten 80s arcade classics in the browser: tributes to Asteroids, Galaga, Pac-Man, Joust, Defender and more, plus the real Zork I', homepage: 'https://rsissons.github.io/retro-arcade/', topics: ['game', 'arcade', 'retro'], pushed_at: '2026-09-29' },
     ];
 
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
