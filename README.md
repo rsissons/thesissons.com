@@ -4,7 +4,7 @@ The project showcase at https://thesissons.com: one static page, hosted free on 
 
 ## PhotoWallz (featured)
 
-The featured card at the top (https://photowallz.netlify.app/) is written into `index.html` by hand, since its repo is private. Its screenshot is `img/photowallz.webp`.
+The featured card at the top (https://photowallz.com/) is written into `index.html` by hand, since its repo is private. Its screenshot is `img/photowallz.webp`.
 
 ## How projects get listed
 
