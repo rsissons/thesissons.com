@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Sissons · Projects</title>
-  <meta name="description" content="Projects by Ron Sissons: PhotoWallz live event photo walls, a CalPERS and CalSTRS retirement planner, golf on two real local courses, a football game, a dress-up game for kids, and a backyard recipe book.">
+  <meta name="description" content="Projects by Ron Sissons: PhotoWallz live event photo walls, an AI email assistant for small businesses, a CalPERS and CalSTRS retirement planner, golf on two real local courses, a football game, a dress-up game for kids, and a backyard recipe book.">
   <meta property="og:title" content="The Sissons · Projects">
   <meta property="og:description" content="Free web apps and games that run right in your browser.">
   <meta property="og:image" content="img/calpers-retirement-planner.webp">
@@ -71,6 +71,7 @@
     .featured p { margin: 0; color: var(--muted); }
     .featured ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
     .featured .actions { margin-top: 6px; }
+    #business .featured { margin: 0 0 22px; }
 
     footer { margin-top: 48px; border-top: 1px solid var(--line); background: var(--surface); }
     footer .wrap { padding: 22px 16px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
@@ -100,12 +101,15 @@
   <main class="wrap">
     <div class="hero">
       <h1>Things I've built</h1>
-      <p>A live photo-wall business for events, plus free apps and games that run right in your browser. The free ones need no sign-up or install, and their source is on GitHub.</p>
+      <p>A few small businesses, plus free apps and games that run right in your browser. The free ones need no sign-up or install, and their source is on GitHub.</p>
     </div>
+    <section class="cat" id="business">
+    <h2>Business</h2>
+    <p>Products I run, or am building into a business.</p>
     <section class="featured" id="photowallz" aria-labelledby="pw-title">
       <a class="shot" href="https://photowallz.com/" aria-label="Visit PhotoWallz"><img src="img/photowallz.webp" alt="The PhotoWallz home page" width="800" height="500"></a>
       <div class="body">
-        <span class="kicker">Featured · My business</span>
+        <span class="kicker">Featured · Live business</span>
         <h2 id="pw-title">PhotoWallz</h2>
         <p>Live photo walls for weddings, parties and events. Guests scan one QR code and upload their photos, which show up live on a TV or projector. Afterward the host downloads the whole collection in one file.</p>
         <ul>
@@ -115,6 +119,8 @@
         </ul>
         <div class="actions"><a class="btn primary" href="https://photowallz.com/">Visit PhotoWallz</a></div>
       </div>
+    </section>
+    <div class="grid" id="business-grid"></div>
     </section>
     <div id="projects"></div>
   </main>
@@ -129,7 +135,9 @@
   <script>
     // Categories come from GitHub repo topics. A repo shows up here only if it has one of these topics;
     // the first match in this order wins (so a kids' game goes under "For the kids").
+    // "business" repos go in the Business section at the top (under PhotoWallz), not in the list below.
     const CATEGORIES = [
+      { topic: 'business', id: 'business' },
       { topic: 'retirement-planning', id: 'retirement', title: 'Retirement planning', blurb: 'Tools for planning a public-employee retirement in California.' },
       { topic: 'kids', id: 'kids', title: 'For the kids', blurb: 'Made for my grandkids. No reading needed.' },
       { topic: 'game', id: 'games', title: 'Games', blurb: 'Sports and arcade games you can play on a phone, tablet or computer.' },
@@ -143,6 +151,7 @@
       'unicorn-stable': 'Unicorn Stable',
       'grill-recipes': 'Sear, Smoke & Simmer',
       'retro-arcade': 'Retro Arcade',
+      'email-ai': 'Email AI Assistant',
     };
     const IMAGES = {
       'calpers-retirement-planner': 'img/calpers-retirement-planner.webp',
@@ -152,11 +161,16 @@
       'unicorn-stable': 'img/unicorn-stable.webp',
       'grill-recipes': 'img/grill-recipes.webp',
       'retro-arcade': 'img/retro-arcade.webp',
+      'email-ai': 'img/email-ai.webp',
     };
-    const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning', 'cooking']);
+    const HIDDEN_TOPICS = new Set(['game', 'kids', 'retirement-planning', 'cooking', 'business']);
+    // Business products whose code is private, so GitHub doesn't list them
+    const PRIVATE_BUSINESS = [
+      { name: 'email-ai', description: 'An email assistant for small businesses. It reads new customer email and writes a reply in the owner\'s voice, with their prices and rules, waiting in Drafts. It never sends anything: the owner reads it and hits send.', topics: ['small business', 'email', 'ai'], cta: { label: 'Ask me about it', href: 'mailto:rgs@thesissons.com?subject=Email%20AI%20Assistant' } },
+    ];
     // Shown if GitHub can't be reached (and replaced by the live list when it can)
     const FALLBACK = [
-      { name: 'calpers-retirement-planner', description: 'A private, browser-only retirement planner for CalPERS and CalSTRS members in California. Runs entirely in your browser.', homepage: 'https://rsissons.github.io/calpers-retirement-planner/', topics: ['retirement-planning', 'calpers', 'calstrs'], pushed_at: '2026-09-25' },
+      { name: 'calpers-retirement-planner', description: 'A private, browser-only retirement planner for CalPERS and CalSTRS members in California. Runs entirely in your browser.', homepage: 'https://rsissons.github.io/calpers-retirement-planner/', topics: ['business', 'retirement-planning', 'calpers', 'calstrs'], pushed_at: '2026-09-25' },
       { name: 'san-dimas-golf', description: 'Canyon Golf: a daily golf game on the real San Dimas Canyon and Marshall Canyon courses. Type a name and play.', homepage: 'https://rsissons.github.io/san-dimas-golf/', topics: ['game', 'golf'], pushed_at: '2026-09-24' },
       { name: 'gridiron-qb', description: '3D pull-back quarterback game: playbook routes, field goals, target toss, four stadiums', homepage: 'https://rsissons.github.io/gridiron-qb/', topics: ['game', 'football'], pushed_at: '2026-09-25' },
       { name: 'dolly-dress-up', description: 'A no-reading dress-up, makeup and hygiene game for little kids', homepage: 'https://rsissons.github.io/dolly-dress-up/', topics: ['kids', 'game'], pushed_at: '2026-09-24' },
@@ -171,19 +185,21 @@
 
     function card(r) {
       const url = safeUrl(r.homepage);
-      const code = `https://github.com/rsissons/${encodeURIComponent(r.name)}`;
+      const code = r.cta ? '' : `https://github.com/rsissons/${encodeURIComponent(r.name)}`;
       const img = IMAGES[r.name] ?? `https://opengraph.githubassets.com/1/rsissons/${encodeURIComponent(r.name)}`;
       const tags = (r.topics ?? []).filter(t => !HIDDEN_TOPICS.has(t)).map(t => `<span>${esc(t)}</span>`).join('');
       const title = esc(titleOf(r));
+      const shot = `<img src="${esc(img)}" alt="Screenshot of ${title}" loading="lazy" width="800" height="500">`;
       return `<article class="card">
-        <a class="shot" href="${esc(url || code)}" aria-label="Open ${title}"><img src="${esc(img)}" alt="Screenshot of ${title}" loading="lazy" width="800" height="500"></a>
+        ${r.cta ? `<div class="shot">${shot}</div>` : `<a class="shot" href="${esc(url || code)}" aria-label="Open ${title}">${shot}</a>`}
         <div class="body">
           <h3>${title}</h3>
           <p>${esc(r.description)}</p>
           ${tags ? `<div class="tags">${tags}</div>` : ''}
           <div class="actions">
+            ${r.cta ? `<a class="btn primary" href="${esc(r.cta.href)}">${esc(r.cta.label)}</a>` : ''}
             ${url ? `<a class="btn primary" href="${esc(url)}">Open</a>` : ''}
-            <a class="btn ghost" href="${esc(code)}">Source</a>
+            ${code ? `<a class="btn ghost" href="${esc(code)}">Source</a>` : ''}
           </div>
         </div>
       </article>`;
@@ -195,9 +211,11 @@
         const cat = byCat.find(c => (r.topics ?? []).includes(c.topic));
         if (cat) cat.repos.push(r);
       }
-      const shown = byCat.filter(c => c.repos.length);
+      const [business, ...rest] = byCat;
+      document.getElementById('business-grid').innerHTML = [...business.repos, ...PRIVATE_BUSINESS].map(card).join('');
+      const shown = rest.filter(c => c.repos.length);
       for (const c of shown) c.repos.sort((a, b) => String(b.pushed_at).localeCompare(String(a.pushed_at)));
-      document.getElementById('nav').innerHTML = '<a href="#photowallz">PhotoWallz</a>' + shown.map(c => `<a href="#${c.id}">${esc(c.title)}</a>`).join('');
+      document.getElementById('nav').innerHTML = '<a href="#business">Business</a>' + shown.map(c => `<a href="#${c.id}">${esc(c.title)}</a>`).join('');
       document.getElementById('projects').innerHTML = shown.map(c => `
         <section class="cat" id="${c.id}">
           <h2>${esc(c.title)}</h2>
